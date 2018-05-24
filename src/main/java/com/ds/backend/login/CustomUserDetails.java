@@ -9,8 +9,13 @@ public class CustomUserDetails implements UserDetails{
 
 	private String username;
 	private String password;
+	private int id;
 	
 	
+	public int getId() {
+		return id;
+	}
+
 	public CustomUserDetails(String username, String password) {
 		super();
 		this.username = username;

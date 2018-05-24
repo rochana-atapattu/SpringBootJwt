@@ -12,13 +12,12 @@ public class User {
 	private int phone;
 	private String email;
 	
-	public User(int id, String username, String name, String password, int phone, String email) {
+	public User(String username, String name, String password, String email) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.name = name;
 		this.password = password;
-		this.phone = phone;
+		//this.phone = phone;
 		this.email = email;
 	}
 
