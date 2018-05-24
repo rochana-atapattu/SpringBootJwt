@@ -1,11 +1,13 @@
 package com.ds.backend.login;
 
+import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 
 public class User {
 
 	@Id
-	private int id;
+	private String id;
 	private String username;
 	private String name;
 	private String password;
@@ -14,18 +16,22 @@ public class User {
 	
 	public User(String username, String name, String password, String email) {
 		super();
+		String temp=UUID.randomUUID().toString();
+		this.id=temp;
 		this.username = username;
 		this.name = name;
 		this.password = password;
 		//this.phone = phone;
 		this.email = email;
+		
+		System.out.println(this.id+" "+ username+" ");
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

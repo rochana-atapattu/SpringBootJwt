@@ -3,6 +3,7 @@ package com.ds.backend.login;
 
 import java.security.SignatureException;
 import java.util.Date;
+import java.util.UUID;
 
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
@@ -16,11 +17,11 @@ public class JwtTokenProvider {
 
 	private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
-    @Value("${app.jwtSecret}")
-    private String jwtSecret;
+   // @Value("${app.jwtSecret}")
+    private String jwtSecret="rochana";
 
-    @Value("${app.jwtExpirationInMs}")
-    private int jwtExpirationInMs;
+   // @Value("${app.jwtExpirationInMs}")
+    private int jwtExpirationInMs=6000000;
 
     public String generateToken(Authentication authentication) {
 
@@ -30,20 +31,21 @@ public class JwtTokenProvider {
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
         return Jwts.builder()
-                .setSubject(Long.toString(customUserDetails.getId()))
+                .setSubject(customUserDetails.getId().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
 
-    public Long getUserIdFromJWT(String token) {
+    public String getUserIdFromJWT(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)
                 .getBody();
-
-        return Long.parseLong(claims.getSubject());
+        String temp=claims.getSubject();
+        System.out.println("ID from token provider" + temp );
+        return temp;
     }
 
     public boolean validateToken(String authToken) throws SignatureException {

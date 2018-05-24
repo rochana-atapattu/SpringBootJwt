@@ -9,15 +9,16 @@ public class CustomUserDetails implements UserDetails{
 
 	private String username;
 	private String password;
-	private int id;
+	private String id;
 	
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public CustomUserDetails(String username, String password) {
+	public CustomUserDetails(String id, String username, String password) {
 		super();
+		this.id=id;
 		this.username = username;
 		this.password = password;
 	}
@@ -30,8 +31,8 @@ public class CustomUserDetails implements UserDetails{
 	
 	public static CustomUserDetails create(User user) {
         
-
-        return new CustomUserDetails(user.getUsername(),user.getPassword());
+		System.out.println("CustomUserDetails "+user.getId()+" " +user.getUsername()+" " +user.getPassword());
+        return new CustomUserDetails(user.getId(),user.getUsername(),user.getPassword());
     }
 
 	@Override
